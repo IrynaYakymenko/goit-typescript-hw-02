@@ -1,5 +1,13 @@
 import Modal from "react-modal";
-const customStyles = {
+import { UnsplashImage } from "../../types";
+
+interface ImageModalProps {
+  image: UnsplashImage;
+  modalIsOpen: boolean;
+  closeModal: () => void;
+}
+
+const customStyles: Modal.Styles = {
   overlay: {
     display: "flex",
     justifyContent: "center",
@@ -26,7 +34,7 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-const ImageModal = ({ image, modalIsOpen, closeModal }) => {
+const ImageModal = ({ image, modalIsOpen, closeModal }: ImageModalProps) => {
   console.log(image);
   return (
     <Modal
@@ -35,7 +43,7 @@ const ImageModal = ({ image, modalIsOpen, closeModal }) => {
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <img src={image.src} alt={image.alt_description} />
+      <img src={image.urls.regular} alt={image.alt_description} />
     </Modal>
   );
 };

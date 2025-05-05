@@ -9,16 +9,17 @@ import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import SearchBar from "./components/SearchBar/SearchBar";
 import { useEffect, useState } from "react";
 import { getImage } from "./servise/unsplashAPI";
+import { UnsplashImage } from "./types";
 
 function App() {
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [showLoadMore, setShowLoadMore] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(false);
-  const [imageModal, setImageModal] = useState(null);
+  const [query, setQuery] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [images, setImages] = useState<UnsplashImage[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const [showLoadMore, setShowLoadMore] = useState<boolean>(false);
+  const [isEmpty, setIsEmpty] = useState<boolean>(false);
+  const [imageModal, setImageModal] = useState<UnsplashImage | null>(null);
 
   useEffect(() => {
     if (!query) {
@@ -34,7 +35,7 @@ function App() {
         }
         setImages((prev) => [...prev, ...photos]);
         setShowLoadMore(page < total_pages);
-      } catch (error) {
+      } catch (error: any) {
         setError(error.message);
       } finally {
         setIsLoading(false);
@@ -43,7 +44,7 @@ function App() {
     fetchData();
   }, [query, page]);
 
-  const handleSubmit = (query) => {
+  const handleSubmit = (query: string) => {
     setQuery(query);
     setImages([]);
     setPage(1);
@@ -56,7 +57,7 @@ function App() {
     setPage(page + 1);
   };
 
-  const openModal = (image) => {
+  const openModal = (image: UnsplashImage | null) => {
     setImageModal(image);
   };
 

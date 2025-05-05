@@ -1,6 +1,10 @@
 import s from "./LoadMoreBtn.module.css";
 
-const LoadMoreBtn = ({ handleClick }) => {
+interface LoadMoreBtnProps {
+  handleClick: () => void;
+}
+
+const LoadMoreBtn = ({ handleClick }: LoadMoreBtnProps) => {
   return (
     <button onClick={handleClick} className={s.btn}>
       Load more
