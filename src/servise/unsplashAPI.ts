@@ -1,22 +1,5 @@
 import axios from "axios";
-
-export type Photo = {
-  id: string;
-  alt_description: string | null;
-  urls: {
-    small: string;
-    regular: string;
-    full: string;
-  };
-  user: {
-    name: string;
-  };
-};
-
-export type ImageResponse = {
-  photos: Photo[];
-  total_pages: number;
-};
+import { UnsplashAPIResponse } from "../types";
 
 const instance = axios.create({
   baseURL: "https://api.unsplash.com",
@@ -25,7 +8,10 @@ const instance = axios.create({
   },
 });
 
-export const getImage = async (query: string, page: number) => {
+export const getImage = async (
+  query: string,
+  page: number
+): Promise<UnsplashAPIResponse> => {
   const { data } = await instance.get("search/photos", {
     params: {
       query,

@@ -9,3 +9,8 @@ export interface UnsplashImage {
     name: string;
   };
 }
+
+export interface UnsplashAPIResponse {
+  total_pages: number;
+  photos: UnsplashImage[];
+}
